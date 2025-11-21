@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>6.Which songs are collaborations or feature other artists? Provide the names of the songs and the respective featured artists, ordered alphabetically by the names of the featured artists.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT DISTINCT s.song_title, p.person_name
+FROM Discography d
+NATURAL JOIN People p
+NATURAL JOIN Songs s
+WHERE d.role_name='Artist' AND p.person_name!='Taylor Swift'
+ORDER BY p.person_name;
+</pre>
+</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+            <th>Artist Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in result %}
+        <tr>
+            <td>{{ song.song_title }}</td>
+            <td>{{ song.person_name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

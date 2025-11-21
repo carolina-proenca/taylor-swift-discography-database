@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>11.What songs were released before 2010 in which Taylor is not a producer? Provide the names of the songs and their respective page views, ordered in descending order of page views.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT DISTINCT s.song_title, s.song_page_views
+FROM Discography d
+NATURAL JOIN People p
+NATURAL JOIN Songs s
+WHERE s.song_title NOT IN(SELECT DISTINCT s.song_title
+FROM Discography d
+NATURAL JOIN People p
+NATURAL JOIN Songs s
+WHERE s.song_release_date LIKE '200%' AND d.role_name='Producer' AND p.person_name='Taylor Swift')
+ORDER BY s.song_page_views DESC;
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+            <th>Page Views</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in result %}
+        <tr>
+            <td>{{ song.song_title }}</td>
+            <td>{{ song.song_page_views }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

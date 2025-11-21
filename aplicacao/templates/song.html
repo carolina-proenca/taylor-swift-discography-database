@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ song.song_title }}</h1>
+
+<p><strong>Release Date:</strong> {{ song.song_release_date }}</p>
+<p><strong>Page Views:</strong> {{ song.song_page_views }}</p>
+<p><strong>Category:</strong> {{ song.category }}</p>
+<p><strong>Song URL:</strong> <a href="{{ song.song_url }}" target="_blank">{{ song.song_url }}</a></p>
+<p><strong>Lyrics:</strong> <a href="/songs/{{ song.SongId }}/lyrics">View Lyrics</a></p>
+
+<h2>Tags</h2>
+<ul>
+    {% for tag in tags %}
+        <li>{{ tag.tag_name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>People Involved</h2>
+<ul>
+    {% for person in people %}
+        <li><strong>{{ person.role_name }}:</strong> {{ person.person_name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Track Information</h2>
+{% if tracks %}
+    <ul>
+    {% for track in tracks %}
+        <li>Track Number: {{ track.album_track_number }} in Album: <a href="/albuns/{{ track.AlbumId }}">{{ track.album_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>This song is not part of an album or does not have track information.</p>
+{% endif %}
+
+{% endblock %}
+
+

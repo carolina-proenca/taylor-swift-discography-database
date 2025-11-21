@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>4.What songs are track number 13 on each album? Provide the names of the songs and their respective albums.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT DISTINCT s.song_title, a.album_title
+FROM Discography d
+NATURAL JOIN Tracks t
+NATURAL JOIN Songs s
+NATURAL JOIN Albums a
+WHERE t.album_track_number=13;
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+            <th>Album Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for track in result %}
+        <tr>
+            <td>{{ track.song_title }}</td>
+            <td>{{ track.album_title }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

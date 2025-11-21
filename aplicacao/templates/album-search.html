@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Search Results for "{{ search.expr }}"</h1>
+
+{% if albuns %}
+    <ul>
+    {% for album in albuns %}
+        <li><a href="/albuns/{{ album.AlbumId }}">{{ album.album_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No albums found matching the search term.</p>
+{% endif %}
+
+{% endblock %}

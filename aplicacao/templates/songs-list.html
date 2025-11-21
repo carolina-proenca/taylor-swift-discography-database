@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Songs</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th><b>Song ID</b></th>
+            <th><b>Title</b></th>
+            <th><b>Release Date</b></th>
+            <th><b>Page Views</b></th>
+            <th><b>Category</b></th>
+            <th><b>Song URL</b></th>
+            <th><b>Lyrics</b></th>  <!-- Nova coluna para Song Lyrics -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in songs %}
+        <tr>
+            <td>
+                <a href="/songs/{{ song.SongId }}">{{ song.SongId }}</a>
+            </td>
+            <td>
+                {{ song.song_title }}  <!-- Removido o link, agora só exibe o título -->
+            </td>
+            <td>
+                {{ song.song_release_date }}
+            </td>
+            <td>
+                {{ song.song_page_views }}
+            </td>
+            <td>
+                {{ song.category }}
+            </td>
+            <td>
+                {% if song.song_url %}
+                    <a href="{{ song.song_url }}" target="_blank">Visit</a>
+                {% else %}
+                    No URL available
+                {% endif %}
+            </td>
+            <td>
+                {% if song.song_lyrics %}
+                    <a href="/songs/{{ song.SongId }}/lyrics">View Lyrics</a>  <!-- Link para ver a letra completa -->
+                {% else %}
+                    No lyrics available
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

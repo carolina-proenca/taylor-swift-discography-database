@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>5.Which songs from the album ‘reputation’ are produced by Jack Antonoff? Order them alphabetically by song names.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT s.song_title
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN People p
+NATURAL JOIN Albums a
+WHERE a.album_title='reputation' and p.person_name='Jack Antonoff'and d.role_name='Producer'
+ORDER BY s.song_title;
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in result %}
+        <tr>
+            <td>{{ song.song_title }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

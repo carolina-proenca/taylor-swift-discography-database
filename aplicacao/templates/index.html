@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="intro-section">
+    <h1>Welcome to Taylor Swift's Discography</h1>
+    <p>Explore Taylor Swift's incredible musical journey with detailed insights and statistics.</p>
+</section>
+
+<hr class="divider">
+
+<section class="stats-section">
+    <h2>Database Statistics</h2>
+    <table border="1" class="stats-table">
+        <thead>
+            <tr>
+                <th>Statistic</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total Songs</td>
+                <td>{{ stats[0] }}</td>
+            </tr>
+            <tr>
+                <td>Total Albums</td>
+                <td>{{ stats[1] }}</td>
+            </tr>
+            <tr>
+                <td>Total People</td>
+                <td>{{ stats[2] }}</td>
+            </tr>
+            <tr>
+                <td>Total Unique Tags</td>
+                <td>{{ stats[3] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<hr class="divider">
+
+<section class="search-section">
+    <h2>Search the Database</h2>
+    <div class="search-box">
+        <!-- Music Search -->
+        <h3>Search Songs</h3>
+        <p>Search for a song by title:</p>
+        <form name="songsearch" action="javascript:window.open('/songs/search/'+document.forms['songsearch'].elements['expr'].value,'_self')">
+            <input name="expr" id="expr" value="" placeholder="Enter song title..." required />
+            <input type="submit" value="Search" />
+        </form>
+
+        <!-- Album Search -->
+        <h3>Search Albums</h3>
+        <p>Search for an album by title:</p>
+        <form name="albumsearch" action="javascript:window.open('/albuns/search/'+document.forms['albumsearch'].elements['expr'].value,'_self')">
+            <input name="expr" id="expr" value="" placeholder="Enter album title..." required />
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+</section>
+
+<hr class="divider">
+
+<section class="explore-section">
+    <h2>Explore Taylor's Universe</h2>
+    <p>Curious to learn more? Click below to explore interesting questions and insights about Taylor's music.</p>
+    <div class="search-box">
+        <a href="/questions" class="button">Explore Questions</a>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>12.What are the three albums with the largest number of songs? Provide the names of the albums and the respective number of songs, ordered in descending order by the number of songs.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+WITH tab AS(SELECT a.album_title, s.song_title
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN Albums a
+GROUP BY a.album_title, s.song_title
+ORDER BY a.album_title)
+SELECT tab.album_title, COUNT(tab.song_title) num
+FROM tab
+GROUP BY tab.album_title
+ORDER BY num DESC
+LIMIT 3;
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Album Title</th>
+            <th>Number of Songs</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for album in result %}
+        <tr>
+            <td>{{ album.album_title }}</td>
+            <td>{{ album.num }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

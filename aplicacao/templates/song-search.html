@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Search Results for "{{ search.expr }}"</h1>
+
+{% if songs %}
+    <ul>
+    {% for song in songs %}
+        <li><a href="/songs/{{ song.SongId }}">{{ song.song_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No songs found matching the search term.</p>
+{% endif %}
+
+{% endblock %}

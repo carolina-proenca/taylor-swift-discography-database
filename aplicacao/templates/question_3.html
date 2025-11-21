@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>3.What are the songs in the category ‘Non-Album Songs’? Provide the name, URL, and release date, ordered by the release date.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT DISTINCT s.song_title, s.song_url, s.song_release_date
+FROM Discography d
+NATURAL JOIN Songs s
+WHERE s.category='Non-Album Songs'
+ORDER BY s.song_release_date;
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+            <th>Song URL</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in result %}
+        <tr>
+            <td>{{ song.song_title }}</td>
+            <td><a href="{{ song.song_url }}" target="_blank">Visit</a></td>
+            <td>{{ song.song_release_date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

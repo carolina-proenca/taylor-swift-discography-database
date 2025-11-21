@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>7.What is the total number of page views for the songs from the album ‘folklore (deluxe version)’?</h1>
+<p><strong>Query:</strong></p>
+<pre>
+WITH tab AS(SELECT DISTINCT s.song_title, s.song_page_views
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN Albums a
+WHERE a.album_title='folklore (deluxe version)')
+SELECT SUM(tab.song_page_views) num
+FROM tab;
+</pre>
+</h1>
+<p>Total views: {{ result[0].num }}</p>
+{% endblock %}

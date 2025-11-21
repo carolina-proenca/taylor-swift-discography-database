@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Albums</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th><b>Album ID</b></th>
+            <th><b>Album Title</b></th>
+            <th><b>Album URL</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for album in albuns %}
+        <tr>
+            <td>
+                <a href="/albuns/{{ album.AlbumId }}">{{ album.AlbumId }}</a>
+            </td>
+            <td>
+                {{ album.album_title }}
+            </td>
+            <td>
+                {% if album.album_url %}
+                    <a href="{{ album.album_url }}" target="_blank">Visit</a>  <!-- O link agora exibe "Visit" -->
+                {% else %}
+                    No URL available
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+

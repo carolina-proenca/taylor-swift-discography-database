@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>8.What is the average number of page views for the songs from the album ‘Speak Now (Deluxe)’?</h1>
+<p><strong>Query:</strong></p>
+<pre>
+WITH tab AS(SELECT DISTINCT s.song_title, s.song_page_views
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN Albums a
+WHERE a.album_title='Speak Now (Deluxe)')
+SELECT AVG(tab.song_page_views) num
+FROM tab;
+</pre>
+<p>Average views: {{ result[0].num }}</p>
+{% endblock %}

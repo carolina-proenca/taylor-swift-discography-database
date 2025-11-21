@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>10.How many times is the word ‘night’ referenced across the entire discography?</h1>
+<p><strong>Query:</strong></p>
+<pre>
+WITH tab AS(SELECT s.song_title
+FROM Discography d
+NATURAL JOIN Songs s
+WHERE s.song_lyrics LIKE '%night%'
+GROUP BY s.song_title)
+SELECT COUNT(*) num FROM tab;
+</pre>
+<p>Total occurrences: {{ result[0].num }}</p>
+{% endblock %}

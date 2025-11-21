@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>1. What are the names of all the albums and their respective URLs?</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT a.album_title, a.album_url
+FROM Albums a;
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Album Title</th>
+            <th>Album URL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for album in result %}
+        <tr>
+            <td>{{ album.album_title }}</td>
+            <td><a href="{{ album.album_url }}" target="_blank">Visit</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

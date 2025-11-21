@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>People</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th><b>Person ID</b></th>
+            <th><b>Person Name</b></th>
+            <th><b>Role</b></th>
+            <th><b>Song Title</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for person in people %}
+        <tr>
+            <td>
+                <a href="/people/{{ person.PersonId }}">{{ person.PersonId }}</a>
+            </td>
+            <td>
+                {{ person.person_name }}
+            </td>
+            <td>
+                {{ person.role_name }}
+            </td>
+            <td>
+                {{ person.song_title }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

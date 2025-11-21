@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>14.Which songs are simultaneously tagged as ‘Rock’ and ‘Orchestral’? Provide the names of the songs and their respective categories.</h1>
+<p><strong>Query:</strong></p>
+<pre>
+SELECT DISTINCT s.song_title, s.category
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN Tags t
+WHERE s.song_title IN (SELECT DISTINCT s.song_title
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN Tags t
+WHERE t.tag_name='Rock') AND s.song_title IN (SELECT DISTINCT s.song_title
+FROM Discography d
+NATURAL JOIN Songs s
+NATURAL JOIN Tags t
+WHERE t.tag_name='Orchestral');
+</pre>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in result %}
+        <tr>
+            <td>{{ song.song_title }}</td>
+            <td>{{ song.category }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>9.Which songs were released after 2010?</h1>
+<p><strong>Query:</strong></p>
+<pre>
+WITH tab AS(SELECT s.song_title
+FROM Discography d
+NATURAL JOIN Songs s
+WHERE s.song_release_date NOT LIKE '200%'
+GROUP BY s.song_title)
+SELECT COUNT(*) num FROM tab;
+</pre>
+<p>Total songs: {{ result[0].num }}</p>
+{% endblock %}
